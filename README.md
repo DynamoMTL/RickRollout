@@ -27,7 +27,7 @@ The gem provides a configuration block that you can use as an initializer in Rai
 RickRollout.configure do |config|
       rollout = Rollout.new(Redis.new(port: 16379))
       rollout.define_group(:admins) { |user| user.admin? }
-      rollout.activate(:my_admin_only_feature)
+      rollout.activate_group(:my_admin_only_feature, :admins)
 
       config.rollout = rollout
     end
