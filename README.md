@@ -40,7 +40,7 @@ This gem depends on the `FEATURE_FLAGS_ENABLED` environment variable.
 If defined and equals 1, then this gem will ask rollout if the feature is available.
 
 If the environment variable equals 0, feature flags are disabled, meaning that the gem will always make the features available
-under any conditions. **This setting is meant for development use only**
+under any conditions. **This setting is meant for development use only**.
 
 By default `FEATURE_FLAGS_ENABLED` is enabled, you will have to have something like 
 `FEATURE_FLAGS_ENABLED=0` in your environment if you wish to disable flags.
