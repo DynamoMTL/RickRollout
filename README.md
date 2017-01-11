@@ -33,7 +33,7 @@ RickRollout.configure do |config|
     end
 ```
 
-Please refer to the [original gem](https://github.com/fetlife/rollout) for all configuration options
+Please refer to the [original gem](https://github.com/fetlife/rollout) for all configuration options.
 
 This gem depends on the `FEATURE_FLAGS_ENABLED` environment variable.
 
@@ -62,6 +62,8 @@ end
 
 
 ```
+
+![Done!](http://i.imgur.com/UNhIFnn.gif)
 
 ## Development
 
