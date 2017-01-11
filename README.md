@@ -1,8 +1,8 @@
 # RickRollout
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rick_rollout`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem is a thin wrapper around the [Rollout](https://github.com/fetlife/rollout) gem.
+It provides a base class to enable easy conditional feature flags within environment variables.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -14,7 +14,7 @@ gem 'rick_rollout'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -22,7 +22,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The gem provides a configuration block that you can use as an initializer in Rails style:
+```ruby
+RickRollout.configure do |config|
+      rollout = Rollout.new(Redis.new(port: 16379))
+      rollout.define_group(:admins) { |user| user.admin? }
+      rollout.activate(:my_admin_only_feature)
+
+      config.rollout = rollout
+    end
+```
+
+Please refer to the [original gem](https://github.com/fetlife/rollout) for all configuration options
+
+This gem depends on the `FEATURE_FLAGS_ENABLED` environment variable.
+
+If defined and equals 1, then this gem will ask rollout if the feature is available.
+
+If the environment variable equals 0, feature flags are disabled, meaning that the gem will always make the features available
+under any conditions. **This setting is meant for development use only**
+
+By default `FEATURE_FLAGS_ENABLED` is enabled, you will have to have something like 
+`FEATURE_FLAGS_ENABLED=0` in your environment if you wish to disable flags.
+
+To create your first feature rollout, you need to subclass the main `RickRollout::Feature` class:
+
+```ruby
+module Feature
+  class Product < RickRollout::Feature
+
+    def all
+      product = ProductRepository
+      return product.all unless active?(:my_admin_only_feature, user)
+
+      product.without_admin_products
+    end
+  end
+end
+
+
+```
 
 ## Development
 
