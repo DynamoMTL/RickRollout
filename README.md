@@ -53,9 +53,9 @@ module Feature
 
     def all
       product = ProductRepository
-      return product.all unless active?(:my_admin_only_feature, user)
+      return product.without_admin_products unless active?(:my_admin_only_feature, user)
 
-      product.without_admin_products
+      product.all
     end
   end
 end
