@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Thin wrapper around the Rollout gem, easily enabled / disabled'
   spec.description   = 'Rick Rollout allows you to extend its base class and have flags to enable features in production or locally'
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/DynamoMTL/RickRollout"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
