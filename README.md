@@ -24,6 +24,8 @@ Or install it yourself as:
 
 The gem provides a configuration block that you can use as an initializer in Rails style:
 ```ruby
+require 'redis'
+require 'rollout'
 RickRollout.configure do |config|
       rollout = Rollout.new(Redis.new(port: 16379))
       rollout.define_group(:admins) { |user| user.admin? }
